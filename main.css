@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&display=swap');
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+* {
+    font-family: 'Tektur', cursive;
+    font-size: 44px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(img/wallhaven-q2oyll.jpg);
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    z-index: 2;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+}
+
+.display input {
+    border: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 0 18px;
+    background-color: #464647;
+    color: white;
+    width: 480px;
+    height: 120px;
+}
+
+.operation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+}
+
+.btn {
+    width: 120px;
+    height: 120px;
+    border: none;
+}
+
+.nbr {}
+
+.opr {}

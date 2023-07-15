@@ -17,38 +17,36 @@ console.log(equals);
 
 numbers.forEach(nbr => {
   nbr.addEventListener('click', () => {
-    if(nbr2){
-      nbr2 = null;
-      result = null;
-      display.value = nbr.innerHTML;
-    }else{
-      display.value += nbr.innerHTML;
+    if (!isNaN(result)) {
+      if (nbr2) {
+        nbr2 = null;
+        result = null;
+        display.value = nbr.innerHTML;
+      } else {
+        display.value += nbr.innerHTML;
+      }
     }
   })
 });
 
 operators.forEach(opr => {
   opr.addEventListener('click', () => {
-    if(nbr1 && operator && display.value != '' && !(result)){
-      nbr2 = parseFloat(display.value);
-      result = operate(nbr1,nbr2,operator);
-      display.value = format(result);
-      nbr1 = result;
-    }
-    else if (display.value != '' && !(result)) {
-      nbr1 = parseFloat(display.value);
-      display.value = '';
+    if (display.value != '' && !(result) && !isNaN(result)) {
+      if (nbr1 && operator) {
+        cal();
+      }
+      else {
+        nbr1 = parseFloat(display.value);
+        display.value = '';
+      }
     }
     operator = opr.innerHTML;
   })
 });
 
 equals.addEventListener('click', () => {
-  if (nbr1 && operator && display.value != '' && !(result)){
-    nbr2 = parseFloat(display.value);
-    result = operate(nbr1,nbr2,operator);
-    display.value = format(result);
-    nbr1 = result;
+  if (nbr1 && operator && display.value != '' && !(result) && !isNaN(result)) {
+    cal();
   }
 })
 
@@ -59,6 +57,13 @@ AC.addEventListener('click', () => {
   operator = null;
   result = null;
 })
+
+function cal() {
+  nbr2 = parseFloat(display.value);
+  result = operate(nbr1, nbr2, operator);
+  display.value = format(result);
+  nbr1 = result;
+}
 
 function add(num1, num2) {
   return num1 + num2;
@@ -84,6 +89,7 @@ function operate(num1, num2, opr) {
     return mul(num1, num2);
   }
   if (opr == '/') {
+    if (num2 == 0) return 'Math Error';
     return div(num1, num2);
   }
 
@@ -91,9 +97,11 @@ function operate(num1, num2, opr) {
 }
 
 
-function format(nbr){
-  if(nbr % 1 !== 0 && nbr.toString().split('.')[1].length > 3){
-    return parseFloat(nbr.toFixed(3));
+function format(nbr) {
+  if (!isNaN(nbr)) {
+    if (nbr % 1 !== 0 && nbr.toString().split('.')[1].length > 3) {
+      return parseFloat(nbr.toFixed(3));
+    }
   }
-  return parseFloat(nbr);
+  return nbr;
 }

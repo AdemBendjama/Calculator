@@ -5,15 +5,14 @@ let result = null;
 
 const display = document.querySelector('.display input');
 
-const numbers = document.querySelectorAll('.nbr');
-const operators = document.querySelectorAll('.opr:not(.clear):not(.equals)');
-const AC = document.querySelector('.clear');
+const numbers = document.querySelectorAll('.nbr:not(.point)');
+const operators = document.querySelectorAll('.cal');
 const equals = document.querySelector('.equals');
+const point = document.querySelector('.point');
+const abs = document.querySelector('.abs');
+const AC = document.querySelector('.clear');
+const DEL = document.querySelector('.delete');
 
-console.log(numbers);
-console.log(operators);
-console.log(AC);
-console.log(equals);
 
 numbers.forEach(nbr => {
   nbr.addEventListener('click', () => {
@@ -44,9 +43,25 @@ operators.forEach(opr => {
   })
 });
 
+point.addEventListener('click', () => {
+  if (display.value != '' && !isNaN(result) && !(nbr2) && checkFloat(display.value)) {
+    display.value += point.innerHTML;
+  }
+})
+
 equals.addEventListener('click', () => {
-  if (nbr1 && operator && display.value != '' && !(result) && !isNaN(result)) {
+  if (nbr1 && operator && (display.value != '') && !(result) && (!isNaN(result))) {
     cal();
+  }
+})
+
+abs.addEventListener('click', () => {
+  if (display.value != '' && !(result)){
+    if(checkPostive(display.value)){
+      display.value = '-'+display.value;
+    }else{
+      display.value = display.value.slice(1)
+    }
   }
 })
 
@@ -56,6 +71,12 @@ AC.addEventListener('click', () => {
   nbr2 = null;
   operator = null;
   result = null;
+})
+
+DEL.addEventListener('click', () => {
+  if (display.value != '' && !(result)) {
+    display.value = display.value.toString().slice(0, -1);
+  }
 })
 
 function cal() {
@@ -96,6 +117,18 @@ function operate(num1, num2, opr) {
   return -1;
 }
 
+function checkPostive(nbr){
+  if(parseFloat(nbr)>0){
+    return true;
+  }
+  return false;
+}
+function checkFloat(nbr) {
+  if (nbr.toString().split('.').length == 1) {
+    return true;
+  }
+  return false;
+}
 
 function format(nbr) {
   if (!isNaN(nbr)) {

@@ -42,7 +42,7 @@ AC.addEventListener('click', () => {
   display.value = '';
   nbr1 = '';
   nbr2 = '';
-  operator = '';
+  display.value = '';
 })
 
 function add(num1, num2) {

@@ -1,2 +1,2 @@
 # Calculator
-small project from the Odin Project
+small project for learning Js

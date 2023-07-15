@@ -30,11 +30,15 @@ body {
 }
 
 .calculator {
-    padding: 40px 10px 10px 10px;
+    padding: 20px 10px 10px 10px;
     background-color: #262c34;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+}
+
+.title{
+    color: white;
 }
 
 .display input {
@@ -46,6 +50,7 @@ body {
     color: white;
     width: 480px;
     height: 100px;
+    text-align: right;
 }
 
 .display input:focus {

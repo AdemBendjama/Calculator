@@ -13,7 +13,6 @@ const abs = document.querySelector('.abs');
 const AC = document.querySelector('.clear');
 const DEL = document.querySelector('.delete');
 
-
 numbers.forEach(nbr => {
   nbr.addEventListener('click', () => {
     if (!isNaN(result)) {
@@ -56,10 +55,10 @@ equals.addEventListener('click', () => {
 })
 
 abs.addEventListener('click', () => {
-  if (display.value != '' && !(result)){
-    if(checkPostive(display.value)){
-      display.value = '-'+display.value;
-    }else{
+  if (display.value != '' && !(result)) {
+    if (checkPostive(display.value)) {
+      display.value = '-' + display.value;
+    } else {
       display.value = display.value.slice(1)
     }
   }
@@ -75,6 +74,7 @@ AC.addEventListener('click', () => {
 
 DEL.addEventListener('click', () => {
   if (display.value != '' && !(result)) {
+    console.log(display.value);
     display.value = display.value.toString().slice(0, -1);
   }
 })
@@ -117,8 +117,8 @@ function operate(num1, num2, opr) {
   return -1;
 }
 
-function checkPostive(nbr){
-  if(parseFloat(nbr)>0){
+function checkPostive(nbr) {
+  if (parseFloat(nbr) > 0) {
     return true;
   }
   return false;
@@ -138,3 +138,36 @@ function format(nbr) {
   }
   return nbr;
 }
+
+
+document.addEventListener('keydown', (event) => {
+  let key = event.key;
+  console.log(key);
+  const buttons = document.querySelectorAll('.btn');
+
+  // assign keyboard to display functionality
+  buttons.forEach(keypress)
+
+  function keypress(btn) {
+    if (btn.innerHTML == key) {
+      btn.click();
+    }
+  }
+
+  //
+  if (key == 'Backspace') {
+    DEL.click();
+  }
+
+  //
+  if (key == 'Delete') {
+    AC.click();
+  }
+
+  // 
+  if (key == 'Enter') {
+    equals.click();
+  }
+
+})
+
